@@ -6,23 +6,19 @@ on:
       - main
 
 jobs:
-  lint:
-    name: Periksa Kode HTML & CSS
-    runs-on: ubuntu-latest
+  test:
+    runs-on: windows-latest
 
     steps:
-      - name: Checkout kode terbaru
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Instal HTMLHint
-        run: npm install -g htmlhint
+      - name: Install HTMLHint & Stylelint
+        run: |
+          npm install -g htmlhint stylelint
 
-      - name: Jalankan HTMLHint
+      - name: Periksa HTML
         run: htmlhint "**/*.html"
 
-      - name: Instal Stylelint
-        run: npm install -g stylelint stylelint-config-standard
-
-      - name: Jalankan Stylelint
+      - name: Periksa CSS
         run: stylelint "**/*.css"
-
